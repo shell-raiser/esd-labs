@@ -10,10 +10,9 @@ export class PlannerList {
   constructor(owner) {
     this.owner = owner;
     this.ids = [];
-  }
-
-  add(id) {
-    this.ids.push(id);
+    this.add = (id) => {
+      this.ids.push(id);
+    };
   }
 
   describe() {
