@@ -19,6 +19,12 @@ export default function App() {
     setMatrix((prev) => incrementAt(prev, row, col));
   }
 
+  useEffect(() => {
+    fetch("/matrix.json")
+      .then((res) => res.json())
+      .then((data) => setMatrix(data));
+  }, []);
+
   return (
     <main className="app">
       <Header />
