@@ -16,21 +16,43 @@ export const START = [
 //   incrementAt([[1, 2], [3, 4]], 1, 0)  →  [[1, 2], [4, 4]]
 // Never change `matrix` (the tests freeze it, so changing it throws).
 // Rows you don't touch must stay the SAME arrays; only the changed row is new.
-export function incrementAt(matrix, row, col) {
-  throw new Error("TODO");
+export function incrementAt(matrix, row, col, step = 1) {
+  const newRow = [...matrix[row]];
+  newRow[col] = newRow[col] + step;
+  const newMatrix = [...matrix];
+  newMatrix[row] = newRow;
+  return newMatrix;
 }
 
 // Section 09 — numbers worked out from the matrix, never stored.
 //   stats([[1, 0], [3, 4]])  →  { sum: 8, average: 2, max: 4, nonZero: 3 }
 // average = sum ÷ the number of cells. An empty matrix, [], gives 0 for all four.
 export function stats(matrix) {
-  throw new Error("TODO");
+  if (matrix.length === 0) {
+    return { sum: 0, average: 0, max: 0, nonZero: 0 };
+  }
+  let sum = 0;
+  let max = 0;
+  let nonZero = 0;
+  let cellCount = 0;
+
+  for (const row of matrix) {
+    for (const value of row) {
+      sum += value;
+      if (value > max) max = value;
+      if (value !== 0) nonZero++;
+      cellCount++;
+    }
+  }
+
+  const average = cellCount > 0 ? sum / cellCount : 0;
+  return { sum, average, max, nonZero };
 }
 
 // Section 12 (stretch) — the same shape, every cell 0.
 //   zeros([[1, 2], [3, 4]])  →  [[0, 0], [0, 0]]
 export function zeros(matrix) {
-  throw new Error("TODO");
+  return matrix.map((row) => row.map(() => 0));
 }
 
 // IN-LAB TASK (AI closed) — leave this until the lab. See inlab/decrement.check.jsx.
